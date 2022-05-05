@@ -16,6 +16,7 @@ def profile(fnc):
     return inner
 
 
+
 @profile
 def main(inventario,ventasxDia):
 
