@@ -3,7 +3,7 @@ import unittest
 def agregarInventarioTesteo(inventario,ventasxDia):
     nombre_producto = input("Nombre del producto: ")
     cantidad_producto = int(input("Cantidad del producto: "))
-    #Metodo append permite apilar un nuevo elemento en la pila
+    
     inventario.append([nombre_producto,cantidad_producto])
     print(inventario)
     return inventario
@@ -33,7 +33,7 @@ def actualizarInventarioTesteo(inventario,ventasxDia):
     elemento = inventario.pop()
     if(elemento[0] != str(nombre_producto)):
       stack_temporal.append(elemento)
-    #Cuando el nombre ingresado coincide con el del       producto que se esta desapilando o evaluando entra el else
+    
     else:
       actualizo=True
       stack_temporal.append([nombre_producto,cantidad_producto])
