@@ -15,6 +15,7 @@ def profile(fnc):
         return retval
     return inner
 
+
 @profile
 def main(inventario,ventasxDia):
 
@@ -47,14 +48,12 @@ def main(inventario,ventasxDia):
         imprimirInventario(inventario,ventasxDia)
     elif opcion ==6:
         registrarVentaxDia(inventario,ventasxDia)
-    elif opcion ==7:
-        registrarVenta(inventario,ventasxDia)
     print("")
 
-#era un arreglo normal se cambió a un stack con el uso de append apilando cada elemento
 def agregarInventario(inventario,ventasxDia):
     nombre_producto = input("Nombre del producto: ")
     cantidad_producto = int(input("Cantidad del producto: "))
+    #Metodo append permite apilar un nuevo elemento en la pila
     inventario.append([nombre_producto,cantidad_producto])
     print(inventario)
     main(inventario,ventasxDia)
@@ -63,8 +62,8 @@ def eliminarInventario(inventario,ventasxDia):
   stack_temporal = []
   nombre_producto = input("Ingrese el nombre del producto a remover: ")
   borro = False
-#revisa la pila si existe
   while(len(inventario)>0):
+    #pop permite desapilar un elemento de la pila
     elemento = inventario.pop()
     if(elemento[0] != str(nombre_producto)):
       stack_temporal.append(elemento)
@@ -87,6 +86,7 @@ def actualizarInventario(inventario,ventasxDia):
     elemento = inventario.pop()
     if(elemento[0] != str(nombre_producto)):
       stack_temporal.append(elemento)
+    #Cuando el nombre ingresado coincide con el del       producto que se esta desapilando o evaluando entra el else
     else:
       actualizo=True
       stack_temporal.append([nombre_producto,cantidad_producto])
@@ -95,24 +95,25 @@ def actualizarInventario(inventario,ventasxDia):
     print("No se encontró el producto con nombre "+ nombre_producto)
   main(stack_temporal,ventasxDia)
 
-def buscarInventario(inventario,ventasxDia):
-
+def buscarInventario(
+  inventario,ventasxDia):
+    stack_temporal=inventario.copy()
     nombre_producto = input('Ingresa el nombre del producto a buscar: ')
     encontro = False
-    while(len(inventario)>0):
-      elemento = inventario.pop()
+    while(len(stack_temporal)>0):
+      elemento = stack_temporal.pop()
       if(elemento[0] == str(nombre_producto)):
         encontro=True
         print("Nombre: " + elemento[0] + " Cantidad: " + str(elemento[1]))       
-
     if(encontro == False):
       print("No existe un objeto con el nombre "+ nombre_producto)
       
     main(inventario,ventasxDia)
         
 def imprimirInventario(inventario,ventasxDia):
-  while(len(inventario)>0):
-     elemento = inventario.pop()
+  stack_temporal = inventario.copy()
+  while(len(stack_temporal)>0):
+     elemento = stack_temporal.pop()
      print("Nombre del producto: "+ elemento[0]+" - Cantidad: "+ str(elemento[1]))
   main(inventario,ventasxDia)
 
@@ -142,7 +143,6 @@ def registrarVentaxDia(inventario, ventasxDia):
 
   main(inventario,ventasxDia)
 
-def registrarVenta(inventario,ventasxDia):
-  print("")
+
   
 main([],np.empty((5,7),dtype='U25'))
